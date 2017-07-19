@@ -25,9 +25,9 @@ with open('SocialTeste.csv', encoding = "utf-8") as csvfile:
                          'weryqyes':Github(token_dict['token_wery']),
                          'walison':Github(''),
                          'marcelf':Github(''),
-                         'eduardo':Github(''),
-                         'julianny':Github(''),
-                         'rodrigo':Github(''),
+                         'eduardo':Github('token_eduardo'),
+                         'julianny':Github('token_julianny'),
+                         'rodrigo':Github('token_rodrigo'),
                          'mbrunodm':Github(''),
                          'andre':Github(''),
                          '':'None'}
