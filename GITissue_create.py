@@ -23,13 +23,13 @@ with open('SocialTeste.csv', encoding = "utf-8") as csvfile:
         colaboradores = {'leogermani':Github(token_dict['token_leo']),
                          'luis':Github(token_dict['token_luis']),
                          'weryqyes':Github(token_dict['token_wery']),
-                         'walison':Github(''),
+                         'walison':Github(token_dict['token_wallison']),
                          'marcelf':Github(''),
-                         'eduardo':Github('token_eduardo'),
-                         'julianny':Github('token_julianny'),
-                         'rodrigo':Github('token_rodrigo'),
+                         'eduardo':Github(token_dict['token_eduardo']),
+                         'julianny':Github(token_dict['token_julianny']),
+                         'rodrigo':Github(token_dict['token_rodrigo']),
                          'mbrunodm':Github(''),
-                         'andre':Github(''),
+                         'andre':Github(token_dict['token_andre']),
                          '':'None'}
         
         repo = colaboradores[row['Relator']].get_organization('medialab-ufg').get_repo('test-issues')
