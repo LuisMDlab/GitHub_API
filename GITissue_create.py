@@ -20,9 +20,9 @@ with open('Issue_Teste.csv', encoding = "utf-8") as csvfile:
         label = {'urgente':'piority:critical', 'alta':'piority:high', 'normal':'piority:medium', 'baixa':'piority:low', #Prioridade
                  
                  'Ajuste':'Bug','Correção de Erro':'Bug', 'Design':'Interface', 'Documentação':'Docs', 'Estudo':'Estudo',\
-                 'Infra-estrutura':None, 'Melhoria':'Improvement' ,'Nova Funcionalidade':'NewFeature', 'Teste':'None', #Categoria
+                 'Infra-estrutura':None, 'Melhoria':'Improvement' ,'Nova Funcionalidade':'NewFeature', 'Teste':None, #Categoria
                  
-                 'atribuido':'dev:ready', 'novo':'', 'resolvido':'dev:validation', 'retorno':'dev:inprogress'} #Estado
+                 'atribuido':'dev:ready', 'novo':None, 'resolvido':'dev:validation', 'retorno':'dev:inprogress'} #Estado
         
         #Colaborators Dict.
         colaboradores = {'leogermani':Github(token_dict['token_leo']),
