@@ -33,7 +33,7 @@ with open('Issue_Teste.csv', encoding = "utf-8") as csvfile:
                          'eduardo':Github(token_dict['token_eduardo']),
                          'julianny':Github(token_dict['token_julianny']),
                          'rodrigo':Github(token_dict['token_rodrigo']),
-                         'mbrunodm':Github(''),
+                         'mbrunodm':Github(token_dict['token_mbruno']),
                          'andre':Github(token_dict['token_andre']),
                          '':None}
         #Connection with repo. (Access Tokens of repository users owners is needed)
