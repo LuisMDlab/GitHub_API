@@ -18,7 +18,10 @@ with open('Issue_Teste.csv', encoding = "utf-8") as csvfile:
         situacao = {'corrigido':'closed', 'reaberto':'open', 'aberto':'open'}
         
         label = {'urgente':'piority:critical', 'alta':'piority:high', 'normal':'piority:medium', 'baixa':'piority:low', #Prioridade
-                 'Ajuste':'Bug','Correção de Erro':'Bug', 'Design':'Interface', 'Documentação':'Docs', 'Estudo':'Estudo', 'Infra-estrutura':None, 'Melhoria':'Improvement' ,'Nova Funcionalidade':'NewFeature', 'Teste':'None', #Categoria
+                 
+                 'Ajuste':'Bug','Correção de Erro':'Bug', 'Design':'Interface', 'Documentação':'Docs', 'Estudo':'Estudo',\
+                 'Infra-estrutura':None, 'Melhoria':'Improvement' ,'Nova Funcionalidade':'NewFeature', 'Teste':'None', #Categoria
+                 
                  'atribuido':'dev:ready', 'novo':'', 'resolvido':'dev:validation', 'retorno':'dev:inprogress'} #Estado
         
         #Colaborators Dict.
