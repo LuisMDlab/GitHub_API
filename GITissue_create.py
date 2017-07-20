@@ -37,13 +37,15 @@ with open('Issue_Teste.csv', encoding = "utf-8") as csvfile:
         repo = colaboradores[row['Relator']].get_organization('medialab-ufg').get_repo('test-issues')
         
         try:
+            #create issue with assignee
             issue = repo.create_issue(title = row['Resumo'],\
                                       body = row['Resumo'],\
                                       assignee = colaboradores[row['Atribuido']].get_user().login,\
                                       labels = [label[row['Prioridade']], label[row['Categoria']], label[row['Estado']]])
         except:
+            #create issue without assignee
             issue = repo.create_issue(title = row['Resumo'],\
                                       body = row['Resumo'],\
-                                      labels = [label[row['Prioridade']], label[row['Categoria']], label[row['Estado']]], created_at = '2007-01-09')
+                                      labels = [label[row['Prioridade']], label[row['Categoria']], label[row['Estado']]])
         #Avoid API Stop.
         time.sleep(5)
