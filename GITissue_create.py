@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jul 14 12:30:28 2017
-@author: MlabL3P
-"""
-#Script to Insert Issues into GitHub.
 
-from github import Github #GitHub Module to connect with API.
-from config import token_dict #External file with a dict of colaborators tokens.
+@author: Lenovo-MlabL3P
+"""
+#Insert Issues into GitHub Python Script.
+
+from github import Github #Connect with GitHub API module.
+from config import token_dict #External file with a colaborators tokens dict.
 import csv
 import time
 
@@ -14,7 +15,7 @@ import time
 with open('Issue_Teste.csv', encoding = "utf-8") as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        #Comparation info dicts.
+        #Info Comparation between  dicts and csv.
         situacao = {'corrigido':'closed', 'reaberto':'open', 'aberto':'open'}
         
         label = {'urgente':'piority:critical', 'alta':'piority:high', 'normal':'piority:medium', 'baixa':'piority:low', #Prioridade
@@ -24,7 +25,7 @@ with open('Issue_Teste.csv', encoding = "utf-8") as csvfile:
                  
                  'atribuido':'dev:ready', 'novo':None, 'resolvido':'dev:validation', 'retorno':'dev:inprogress'} #Estado
         
-        #Colaborators Dict.
+        #Colaborators Dict, with Github object.
         colaboradores = {'leogermani':Github(token_dict['token_leo']),
                          'luis':Github(token_dict['token_luis']),
                          'weryqyes':Github(token_dict['token_wery']),
@@ -36,19 +37,47 @@ with open('Issue_Teste.csv', encoding = "utf-8") as csvfile:
                          'mbrunodm':Github(token_dict['token_mbruno']),
                          'andre':Github(token_dict['token_andre']),
                          '':None}
-        #Connection with repo. (Access Tokens of repository users owners is needed)
+        #Repository Connection. (Access Tokens of repository users owners is needed)
         repo = colaboradores[row['Relator']].get_organization('medialab-ufg').get_repo('test-issues')
         
-        try:
-            #create issue with assignee
-            issue = repo.create_issue(title = row['Resumo'],\
-                                      body = row['Resumo'],\
-                                      assignee = colaboradores[row['Atribuido']].get_user().login,\
-                                      labels = [label[row['Prioridade']], label[row['Categoria']], label[row['Estado']]])
-        except:
-            #create issue without assignee
-            issue = repo.create_issue(title = row['Resumo'],\
-                                      body = row['Resumo'],\
-                                      labels = [label[row['Prioridade']], label[row['Categoria']], label[row['Estado']]])
-        #Avoid API Stop.
-        time.sleep(5)
+        try:#Create issue with assignee
+            #Conditional chain to avoid "None" values from csv.
+            if label[row['Prioridade']] == None:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          assignee = colaboradores[row['Atribuido']].get_user().login,\
+                                          labels = [label[row['Categoria']], label[row['Estado']]])
+            elif label[row['Categoria']] == None:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          assignee = colaboradores[row['Atribuido']].get_user().login,\
+                                          labels = [label[row['Prioridade']], label[row['Estado']]])
+            elif label[row['Estado']] == None:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          assignee = colaboradores[row['Atribuido']].get_user().login,\
+                                          labels = [label[row['Prioridade']], label[row['Categoria']]])
+            else:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          assignee = colaboradores[row['Atribuido']].get_user().login,\
+                                          labels = [label[row['Prioridade']], label[row['Categoria']], label[row['Estado']]])
+        except:#Create issue without assignee
+            #Conditional chain to avoid "None" values from csv.
+            if label[row['Prioridade']] == None:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          labels = [label[row['Categoria']], label[row['Estado']]])
+            elif label[row['Categoria']] == None:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          labels = [label[row['Prioridade']], label[row['Estado']]])
+            elif label[row['Estado']] == None:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          labels = [label[row['Prioridade']], label[row['Categoria']]])
+            else:
+                issue = repo.create_issue(title = row['Resumo'],\
+                                          body = row['Resumo'],\
+                                          labels = [label[row['Prioridade']], label[row['Categoria']], label[row['Estado']]])
+        time.sleep(3) #Avoid API Stop or Block.
