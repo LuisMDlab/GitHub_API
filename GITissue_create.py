@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jul 14 12:30:28 2017
-
-@author: Lenovo-MlabL3P
+@author: LuisMDlab
 """
 #Insert Issues into GitHub Python Script.
 
